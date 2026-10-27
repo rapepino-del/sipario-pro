@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipario Pro — Il Media Player Intelligente</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 80px 20px 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        td:nth-child(2), td:nth-child(3) {
+            text-align: center;
+        }
+        .check { color: #22c55e; font-weight: bold; }
+        .dash { color: var(--text-muted); }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .step-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        .step-item h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+        footer a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sipario Pro</h1>
+        <p class="subtitle">Il media player intelligente, veloce e sicuro per organizzare e riprodurre i tuoi flussi e playlist personali su Windows, macOS e Linux.</p>
+        <a href="#download" class="btn">Scarica Prova Gratuita (7 Giorni)</a>
+    </header>
+
+    <div class="container">
+        
+        <!-- SEZIONE FUNZIONAMENTO / COME FUNZIONA -->
+        <div class="card">
+            <h2>Come iniziare in 3 semplici passaggi</h2>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <h3>1. Installa l'app</h3>
+                    <p>Scarica Sipario Pro sul tuo computer e provalo subito con tutte le funzioni sbloccate per 7 giorni.</p>
+                </div>
+                <div class="step-item">
+                    <h3>2. Copia il codice</h3>
+                    <p>Apri l'app, vai su <em>Passa a Premium</em> e copia il tuo <strong>codice dispositivo</strong> univoco.</p>
+                </div>
+                <div class="step-item">
+                    <h3>3. Attiva Premium</h3>
+                    <p>Acquista la licenza inserendo il codice: riceverai subito la chiave per sbloccare la versione definitiva.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE CONFRONTO FREE VS PREMIUM -->
+        <div class="card">
+            <h2>Free vs Premium</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funzionalità</th>
+                        <th>Free</th>
+                        <th>Premium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Live TV, Film, Serie, Ricerca & Riprendi</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Playlist salvate</td>
+                        <td>1</td>
+                        <td>Illimitate</td>
+                    </tr>
+                    <tr>
+                        <td>Profili utente separati</td>
+                        <td>1</td>
+                        <td>Fino a 6</td>
+                    </tr>
+                    <tr>
+                        <td>Preferiti</td>
+                        <td>20</td>
+                        <td>Illimitati</td>
+                    </tr>
+                    <tr>
+                        <td>Cronologia completa</td>
+                        <td>Ultimi 5</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Guida TV (Ora/Dopo) & Controllo Parentale</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Episodio successivo automatico & Timer</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center; margin-top: 30px;" id="download">
+                <a href="URL_DEL_TUO_CHECKOUT_O_DOWNLOAD" class="btn">Acquista Licenza / Ottieni Installer</a>
+            </div>
+        </div>
+
+        <!-- SEZIONE FAQ -->
+        <div class="card">
+            <h2>Domande Frequenti</h2>
+            <p><strong>Cos'è esattamente Sipario Pro?</strong><br>È un media player software avanzato per la riproduzione di flussi multimediali e playlist. Il programma non fornisce alcun tipo di contenuto, canale o playlist precaricata.</p>
+            <p><strong>La licenza scade?</strong><br>Puoi scegliere tra la licenza a vita (senza scadenze) o l'abbonamento annuale, a seconda delle tue preferenze in fase di acquisto.</p>
+            <p><strong>Dove trovo il codice dispositivo?</strong><br>Basta aprire l'applicazione installata sul tuo computer, fare clic sulla sezione dedicata all'account o a Premium: il codice macchina sarà ben visibile e pronto da copiare.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Sipario Pro. Tutti i diritti riservati.</p>
+        <p>
+            <a href="URL_EULA">Termini e Condizioni (EULA)</a> | 
+            <a href="URL_PRIVACY">Privacy Policy</a> | 
+            <a href="mailto:tua-email@dominio.it">Supporto</a>
+        </p>
+    </footer>
+
+</body>
+</html>
