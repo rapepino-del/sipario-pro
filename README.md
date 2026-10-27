@@ -1,115 +1,270 @@
-<div align="center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipario Pro — Media Player</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 80px 20px 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2.section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .pricing-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+        }
+        .pricing-box.featured {
+            border-color: var(--accent-color);
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .pricing-box h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 15px 0;
+        }
+        .price-note {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        td:nth-child(2), td:nth-child(3) {
+            text-align: center;
+        }
+        .check { color: #22c55e; font-weight: bold; }
+        .dash { color: var(--text-muted); }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .step-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        .step-item h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+        footer a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
 
-  <h1>🎬 SIPARIO PRO</h1>
-  <p><b>The Ultimate Next-Generation Smart Media Player for Windows, macOS, and Linux</b></p>
+    <header>
+        <h1>Sipario Pro</h1>
+        <p class="subtitle">The smart, fast, and secure media player to organize and play your personal streams and playlists on Windows, macOS, and Linux.</p>
+        <a href="https://t.me/pietroabcd" target="_blank" class="btn">Request License on Telegram</a>
+    </header>
 
-  <p>
-    <a href="https://t.me/pietroabcd"><img src="https://img.shields.io/badge/Telegram-Buy%20Licence-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Buy"></a>
-    <a href="https://t.me/pietroabcd"><img src="https://img.shields.io/badge/Status-Instant%20Activation-success?style=for-the-badge" alt="Status"></a>
-    <img src="https://img.shields.io/badge/Platform-Windows%20|%20macOS%20|%20Linux-blue?style=for-the-badge" alt="Platforms">
-  </p>
+    <div class="container">
+        
+        <div class="card">
+            <h2 class="section-title">Plans & Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-box">
+                    <h3>Annual</h3>
+                    <div class="price">€ 19.90</div>
+                    <div class="price-note">billed annually · updates included</div>
+                    <a href="https://t.me/pietroabcd" target="_blank" class="btn">Choose Annual</a>
+                </div>
+                <div class="pricing-box featured">
+                    <h3>Lifetime</h3>
+                    <div class="price">€ 69.90</div>
+                    <div class="price-note">one-time payment · permanent license</div>
+                    <a href="https://t.me/pietroabcd" target="_blank" class="btn">Choose Lifetime</a>
+                </div>
+            </div>
+        </div>
 
-</div>
+        <div class="card">
+            <h2 class="section-title">How to Start in 3 Simple Steps</h2>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <h3>1. Install the App</h3>
+                    <p>Download Sipario Pro on your computer and test it immediately with all features unlocked for a 1-day free trial.</p>
+                </div>
+                <div class="step-item">
+                    <h3>2. Copy Your Code</h3>
+                    <p>Open the app, go to Upgrade to Premium, and copy your unique device code.</p>
+                </div>
+                <div class="step-item">
+                    <h3>3. Contact Me on Telegram</h3>
+                    <p>Send me your device code on Telegram to activate your Annual or Lifetime license.</p>
+                </div>
+            </div>
+        </div>
 
-<hr />
+        <div class="card">
+            <h2 class="section-title">Free vs Premium</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th>Free (1-Day Trial)</th>
+                        <th>Sipario Pro (Premium)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Live TV, Movies, Series, Search & Resume</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Saved Playlists</td>
+                        <td>1</td>
+                        <td><b>Unlimited</b></td>
+                    </tr>
+                    <tr>
+                        <td>Separate User Profiles</td>
+                        <td>1</td>
+                        <td><b>Up to 6</b></td>
+                    </tr>
+                    <tr>
+                        <td>Favorites</td>
+                        <td>1</td>
+                        <td><b>Unlimited</b></td>
+                    </tr>
+                    <tr>
+                        <td>Full Watch History</td>
+                        <td>Last 2</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>TV Guide (Now/Next) & Parental Control</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Auto-Play Next Episode & Sleep Timer</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://t.me/pietroabcd" target="_blank" class="btn">Contact me on Telegram (@pietroabcd)</a>
+            </div>
+        </div>
 
-<h2>⚡ Stop Settling for Clunky, Slow Media Players</h2>
+        <div class="card">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p><strong>What exactly is Sipario Pro?</strong><br>It is an advanced media player software for playing multimedia streams and playlists. The application does not provide any preloaded content, channels, or playlists.</p>
+            <p><strong>How does the free trial work?</strong><br>As soon as you install the application, you get 1 full day to test all advanced Premium features completely risk-free.</p>
+            <p><strong>How do I receive the license after writing on Telegram?</strong><br>Just send me the device code found inside the app, and I will generate your activation key bound to your PC.</p>
+        </div>
 
-<p><b>Your media collection deserves more than buffering, outdated interfaces, and feature limitations.</b></p>
+    </div>
 
-<p><b>Sipario Pro</b> is engineered from the ground up for power users who demand speed, complete control, and a sleek modern interface. Whether you manage thousands of live channels, vast movie libraries, or multi-user home setups, Sipario Pro delivers a fluid, studio-grade playback experience without missing a beat.</p>
+    <footer>
+        <p>&copy; 2026 Sipario Pro. All rights reserved.</p>
+        <p>
+            <a href="https://t.me/pietroabcd" target="_blank">Telegram Contact</a> | 
+            <a href="mailto:support@sipariopro.com">Support</a>
+        </p>
+    </footer>
 
-<p align="center">
-  <a href="https://t.me/pietroabcd"><b>👉 Click Here to Get Your License on Telegram (@pietroabcd) 👈</b></a>
-Loaded with a <b>7-day full free trial</b> right upon installation.
-</p>
-
-<hr />
-
-<h2>🌟 Why Sipario Pro Outperforms the Rest</h2>
-
-<ul>
-  <li>🚀 <b>Blazing Fast Performance:</b> Instant channel switching, smooth 4K playback, and ultra-light memory usage.</li>
-  <li>🌍 <b>Native Multi-Language Support:</b> Full translation for English, Italian, Spanish, French, Arabic (RTL support), and Simplified Chinese.</li>
-  <li>👨‍👩‍👧‍👦 <b>Multi-Profile Freedom:</b> Up to 6 separate user profiles with individual favorites, playback history, and PIN protection.</li>
-  <li>📺 <b>Integrated EPG & Auto-Next:</b> TV Guide (Now/Next), automated episode progression, and sleep timers for night viewing.</li>
-  <li>🛡️ <b>Privacy & Security First:</b> Zero telemetry, no ad tracking, and clean hardware-accelerated rendering.</li>
-</ul>
-
-<hr />
-
-<h2>📊 Free vs Premium Comparison</h2>
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left">Feature</th>
-      <th align="center">Free Version</th>
-      <th align="center">Sipario Pro (Premium)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Live TV, Movies, Series, Search & Resume</b></td>
-      <td align="center">✅ Full</td>
-      <td align="center">✅ Full</td>
-    </tr>
-    <tr>
-      <td><b>Saved Playlists</b></td>
-      <td align="center">1 Playlist</td>
-      <td align="center"><b>🔥 Unlimited</b></td>
-    </tr>
-    <tr>
-      <td><b>User Profiles</b></td>
-      <td align="center">1 Profile</td>
-      <td align="center"><b>🔥 Up to 6 Profiles</b></td>
-    </tr>
-    <tr>
-      <td><b>Favorites List</b></td>
-      <td align="center">20 Items</td>
-      <td align="center"><b>🔥 Unlimited</b></td>
-    </tr>
-    <tr>
-      <td><b>Watch History</b></td>
-      <td align="center">Last 5 Titles</td>
-      <td align="center"><b>🔥 Full History</b></td>
-    </tr>
-    <tr>
-      <td><b>Hidden Categories</b></td>
-      <td align="center">Up to 5</td>
-      <td align="center"><b>🔥 Unlimited</b></td>
-    </tr>
-    <tr>
-      <td><b>TV Guide (EPG) & Parental PIN</b></td>
-      <td align="center">❌ No</td>
-      <td align="center"><b>✅ Included</b></td>
-    </tr>
-    <tr>
-      <td><b>Auto-Play Next Episode & Sleep Timer</b></td>
-      <td align="center">❌ No</td>
-      <td align="center"><b>✅ Included</b></td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<h2>🚀 How to Get Started in 3 Simple Steps</h2>
-
-<ol>
-  <li><b>Download & Install:</b> Install Sipario Pro on your PC/Mac. Enjoy all Premium features unlocked for your first 7 days.</li>
-  <li><b>Copy Your Device Code:</b> Open Sipario Pro, navigate to <i>Upgrade to Premium</i>, and copy your unique Device Code (e.g., <code>ABCDE-12345-FGHIJ</code>).</li>
-  <li><b>Activate via Telegram:</b> Send your Device Code directly to <a href="https://t.me/pietroabcd"><b>@pietroabcd</b></a> on Telegram to receive your instant lifetime or annual license key!</li>
-</ol>
-
-<hr />
-
-<div align="center">
-  <h3>Ready to Upgrade Your Streaming Experience?</h3>
-  <p>Get in touch on Telegram for instant activation and dedicated customer support.</p>
-  <p>
-    <a href="https://t.me/pietroabcd">
-      <img src="https://img.shields.io/badge/Contact%20on%20Telegram-@pietroabcd-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Contact Telegram" />
-    </a>
-  </p>
-</div>
+</body>
+</html>
