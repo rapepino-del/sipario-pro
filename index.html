@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sipario Pro — Il Media Player Intelligente</title>
+    <title>Sipario Pro — Media Player</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -21,6 +21,62 @@
             padding: 0;
             line-height: 1.6;
         }
+        /* SPLASH SCREEN LINGUA */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #090d16;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .splash-box {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+        }
+        .splash-box h2 {
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .splash-box p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .lang-btn {
+            background-color: #334155;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .lang-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* CONTENUTO PRINCIPALE DEL SITO */
         header {
             text-align: center;
             padding: 80px 20px 40px 20px;
@@ -63,7 +119,7 @@
             margin-bottom: 30px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        h2 {
+        h2.section-title {
             text-align: center;
             margin-bottom: 30px;
             font-size: 1.8rem;
@@ -119,105 +175,165 @@
 </head>
 <body>
 
+    <!-- SPLASH SCREEN SELEZIONE LINGUA -->
+    <div id="splash-screen">
+        <div class="splash-box">
+            <h2>Sipario Pro</h2>
+            <p>Seleziona la tua lingua / Choose your language</p>
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="setLanguage('it')">Italiano</button>
+                <button class="lang-btn" onclick="setLanguage('en')">English</button>
+                <button class="lang-btn" onclick="setLanguage('es')">Español</button>
+                <button class="lang-btn" onclick="setLanguage('fr')">Français</button>
+                <button class="lang-btn" onclick="setLanguage('ar')">العربية</button>
+                <button class="lang-btn" onclick="setLanguage('zh')">中文</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENUTO DEL SITO -->
     <header>
-        <h1>Sipario Pro</h1>
-        <p class="subtitle">Il media player intelligente, veloce e sicuro per organizzare e riprodurre i tuoi flussi e playlist personali su Windows, macOS e Linux.</p>
-        <a href="#download" class="btn">Scarica Prova Gratuita (7 Giorni)</a>
+        <h1 id="t-title">Sipario Pro</h1>
+        <p class="subtitle" id="t-subtitle">Il media player intelligente, veloce e sicuro per organizzare e riprodurre i tuoi flussi e playlist personali su Windows, macOS e Linux.</p>
+        <a href="https://t.me/pietroabcd" target="_blank" class="btn" id="t-main-btn">Richiedi la Licenza su Telegram</a>
     </header>
 
     <div class="container">
         
-        <!-- SEZIONE FUNZIONAMENTO / COME FUNZIONA -->
         <div class="card">
-            <h2>Come iniziare in 3 semplici passaggi</h2>
+            <h2 class="section-title" id="t-steps-title">Come iniziare in 3 semplici passaggi</h2>
             <div class="steps-grid">
                 <div class="step-item">
-                    <h3>1. Installa l'app</h3>
-                    <p>Scarica Sipario Pro sul tuo computer e provalo subito con tutte le funzioni sbloccate per 7 giorni.</p>
+                    <h3 id="t-step1-h">1. Installa l'app</h3>
+                    <p id="t-step1-p">Scarica Sipario Pro sul tuo computer e provalo subito con tutte le funzioni sbloccate per 7 giorni.</p>
                 </div>
                 <div class="step-item">
-                    <h3>2. Copia il codice</h3>
-                    <p>Apri l'app, vai su <em>Passa a Premium</em> e copia il tuo <strong>codice dispositivo</strong> univoco.</p>
+                    <h3 id="t-step2-h">2. Copia il codice</h3>
+                    <p id="t-step2-p">Apri l'app, vai su Passa a Premium e copia il tuo codice dispositivo univoco.</p>
                 </div>
                 <div class="step-item">
-                    <h3>3. Attiva Premium</h3>
-                    <p>Acquista la licenza inserendo il codice: riceverai subito la chiave per sbloccare la versione definitiva.</p>
+                    <h3 id="t-step3-h">3. Contattami su Telegram</h3>
+                    <p id="t-step3-p">Inviami il codice dispositivo su Telegram per completare l'attivazione della tua licenza.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SEZIONE CONFRONTO FREE VS PREMIUM -->
         <div class="card">
-            <h2>Free vs Premium</h2>
+            <h2 class="section-title" id="t-table-title">Free vs Premium</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Funzionalità</th>
+                        <th id="t-th-feat">Funzionalità</th>
                         <th>Free</th>
                         <th>Premium</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Live TV, Film, Serie, Ricerca & Riprendi</td>
+                        <td id="t-row1">Live TV, Film, Serie, Ricerca & Riprendi</td>
                         <td><span class="check">✓</span></td>
                         <td><span class="check">✓</span></td>
                     </tr>
                     <tr>
-                        <td>Playlist salvate</td>
+                        <td id="t-row2">Playlist salvate</td>
                         <td>1</td>
-                        <td>Illimitate</td>
+                        <td id="t-unlimited1">Illimitate</td>
                     </tr>
                     <tr>
-                        <td>Profili utente separati</td>
+                        <td id="t-row3">Profili utente separati</td>
                         <td>1</td>
-                        <td>Fino a 6</td>
+                        <td id="t-up-to-6">Fino a 6</td>
                     </tr>
                     <tr>
-                        <td>Preferiti</td>
+                        <td id="t-row4">Preferiti</td>
                         <td>20</td>
-                        <td>Illimitati</td>
+                        <td id="t-unlimited2">Illimitati</td>
                     </tr>
                     <tr>
-                        <td>Cronologia completa</td>
-                        <td>Ultimi 5</td>
+                        <td id="t-row5">Cronologia completa</td>
+                        <td id="t-last-5">Ultimi 5</td>
                         <td><span class="check">✓</span></td>
                     </tr>
                     <tr>
-                        <td>Guida TV (Ora/Dopo) & Controllo Parentale</td>
+                        <td id="t-row6">Guida TV (Ora/Dopo) & Controllo Parentale</td>
                         <td><span class="dash">—</span></td>
                         <td><span class="check">✓</span></td>
                     </tr>
                     <tr>
-                        <td>Episodio successivo automatico & Timer</td>
+                        <td id="t-row7">Episodio successivo automatico & Timer</td>
                         <td><span class="dash">—</span></td>
                         <td><span class="check">✓</span></td>
                     </tr>
                 </tbody>
             </table>
-            <div style="text-align: center; margin-top: 30px;" id="download">
-                <a href="URL_DEL_TUO_CHECKOUT_O_DOWNLOAD" class="btn">Acquista Licenza / Ottieni Installer</a>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://t.me/pietroabcd" target="_blank" class="btn" id="t-table-btn">Contattami su Telegram (@pietroabcd)</a>
             </div>
         </div>
 
-        <!-- SEZIONE FAQ -->
         <div class="card">
-            <h2>Domande Frequenti</h2>
-            <p><strong>Cos'è esattamente Sipario Pro?</strong><br>È un media player software avanzato per la riproduzione di flussi multimediali e playlist. Il programma non fornisce alcun tipo di contenuto, canale o playlist precaricata.</p>
-            <p><strong>La licenza scade?</strong><br>Puoi scegliere tra la licenza a vita (senza scadenze) o l'abbonamento annuale, a seconda delle tue preferenze in fase di acquisto.</p>
-            <p><strong>Dove trovo il codice dispositivo?</strong><br>Basta aprire l'applicazione installata sul tuo computer, fare clic sulla sezione dedicata all'account o a Premium: il codice macchina sarà ben visibile e pronto da copiare.</p>
+            <h2 class="section-title" id="t-faq-title">Domande Frequenti</h2>
+            <p><strong id="t-faq1-q">Cos'è esattamente Sipario Pro?</strong><br><span id="t-faq1-a">È un media player software avanzato per la riproduzione di flussi multimediali e playlist. Il programma non fornisce alcun tipo di contenuto, canale o playlist precaricata.</span></p>
+            <p><strong id="t-faq2-q">Come ricevo la licenza dopo aver scritto su Telegram?</strong><br><span id="t-faq2-a">Basta inviarmi il codice dispositivo che trovi all'interno dell'app. Provvederò a generare la chiave di attivazione legata al tuo PC.</span></p>
+            <p><strong id="t-faq3-q">Dove trovo il codice dispositivo?</strong><br><span id="t-faq3-a">Basta aprire l'applicazione installata sul tuo computer, fare clic sulla sezione dedicata all'account o a Premium: il codice macchina sarà ben visibile e pronto da copiare.</span></p>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Sipario Pro. Tutti i diritti riservati.</p>
+        <p id="t-footer-copy">&copy; 2026 Sipario Pro. Tutti i diritti riservati.</p>
         <p>
-            <a href="URL_EULA">Termini e Condizioni (EULA)</a> | 
-            <a href="URL_PRIVACY">Privacy Policy</a> | 
-            <a href="mailto:tua-email@dominio.it">Supporto</a>
+            <a href="https://t.me/pietroabcd" target="_blank" id="t-footer-tg">Contatto Telegram</a> | 
+            <a href="mailto:tua-email@dominio.it" id="t-footer-supp">Supporto</a>
         </p>
     </footer>
 
-</body>
-</html>
+    <script>
+        const translations = {
+            it: {
+                title: "Sipario Pro",
+                subtitle: "Il media player intelligente, veloce e sicuro per organizzare e riprodurre i tuoi flussi e playlist personali su Windows, macOS e Linux.",
+                mainBtn: "Richiedi la Licenza su Telegram",
+                stepsTitle: "Come iniziare in 3 semplici passaggi",
+                step1H: "1. Installa l'app",
+                step1P: "Scarica Sipario Pro sul tuo computer e provalo subito con tutte le funzioni sbloccate per 7 giorni.",
+                step2H: "2. Copia il codice",
+                step2P: "Apri l'app, vai su Passa a Premium e copia il tuo codice dispositivo univoco.",
+                step3H: "3. Contattami su Telegram",
+                step3P: "Inviami il codice dispositivo su Telegram per completare l'attivazione della tua licenza.",
+                tableTitle: "Free vs Premium",
+                thFeat: "Funzionalità",
+                row1: "Live TV, Film, Serie, Ricerca & Riprendi",
+                row2: "Playlist salvate",
+                unlimited1: "Illimitate",
+                row3: "Profili utente separati",
+                upTo6: "Fino a 6",
+                row4: "Preferiti",
+                unlimited2: "Illimitati",
+                row5: "Cronologia completa",
+                last5: "Ultimi 5",
+                row6: "Guida TV (Ora/Dopo) & Controllo Parentale",
+                row7: "Episodio successivo automatico & Timer",
+                tableBtn: "Contattami su Telegram (@pietroabcd)",
+                faqTitle: "Domande Frequenti",
+                faq1Q: "Cos'è esattamente Sipario Pro?",
+                faq1A: "È un media player software avanzato per la riproduzione di flussi multimediali e playlist. Il programma non fornisce alcun tipo di contenuto, canale o playlist precaricata.",
+                faq2Q: "Come ricevo la licenza dopo aver scritto su Telegram?",
+                faq2A: "Basta inviarmi il codice dispositivo che trovi all'interno dell'app. Provvederò a generare la chiave di attivazione legata al tuo PC.",
+                faq3Q: "Dove trovo il codice dispositivo?",
+                faq3A: "Basta aprire l'applicazione installata sul tuo computer, fare clic sulla sezione dedicata all'account o a Premium: il codice macchina sarà ben visibile e pronto da copiare.",
+                footerCopy: "&copy; 2026 Sipario Pro. Tutti i diritti riservati.",
+                footerTg: "Contatto Telegram",
+                footerSupp: "Supporto"
+            },
+            en: {
+                title: "Sipario Pro",
+                subtitle: "The smart, fast, and secure media player to organize and play your personal streams and playlists on Windows, macOS, and Linux.",
+                mainBtn: "Request License on Telegram",
+                stepsTitle: "How to start in 3 simple steps",
+                step1H: "1. Install the app",
+                step1P: "Download Sipario Pro on your computer and test it immediately with all features unlocked for 7 days.",
+                step2H: "2. Copy the code",
+                step2P: "Open the app, go to Upgrade to Premium, and copy your unique device code.",
+                step3H: "3. Contact me on Telegram",
+                step
