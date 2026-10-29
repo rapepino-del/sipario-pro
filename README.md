@@ -4,8 +4,8 @@
   <p><b>The Ultimate Next-Generation Smart Media Player for Windows, macOS, and Linux</b></p>
 
   <p>
-    <a href="https://t.me/pietroabcd"><img src="https://img.shields.io/badge/Telegram-Buy%20Licence-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Buy"></a>
-    <a href="https://t.me/pietroabcd"><img src="https://img.shields.io/badge/Trial-1%20Day%20Free-success?style=for-the-badge" alt="Trial"></a>
+    <a href="https://t.me/sipariopro_bot"><img src="https://img.shields.io/badge/Telegram-Buy%20Licence-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Buy"></a>
+    <a href="https://t.me/sipariopro_bot"><img src="https://img.shields.io/badge/Trial-1%20Day%20Free-success?style=for-the-badge" alt="Trial"></a>
     <img src="https://img.shields.io/badge/Platform-Windows%20|%20macOS%20|%20Linux-blue?style=for-the-badge" alt="Platforms">
   </p>
 
@@ -20,7 +20,7 @@
 <p><b>Sipario Pro</b> is engineered from the ground up for power users who demand speed, complete control, and a sleek modern interface. Whether you manage thousands of live channels, vast movie libraries, or multi-user home setups, Sipario Pro delivers a fluid, studio-grade playback experience without missing a beat.</p>
 
 <p align="center">
-  <a href="https://t.me/pietroabcd"><b>👉 Click Here to Get Your License on Telegram (@pietroabcd) 👈</b></a><br>
+  <a href="https://t.me/sipariopro_bot"><b>👉 Click Here to Get Your License on Telegram (@sipariopro_bot) 👈</b></a><br>
   Loaded with a <b>1-day full free trial</b> right upon installation.
 </p>
 
@@ -42,13 +42,13 @@
       <td><b>Annual Plan</b></td>
       <td align="center"><b>€ 19.90</b></td>
       <td align="center">Billed annually · Updates included</td>
-      <td align="center"><a href="https://t.me/pietroabcd">Get Annual</a></td>
+      <td align="center"><a href="https://t.me/sipariopro_bot">Get Annual</a></td>
     </tr>
     <tr>
       <td><b>Lifetime Plan</b></td>
       <td align="center"><b>€ 69.90</b></td>
       <td align="center">One-time payment · Permanent license</td>
-      <td align="center"><a href="https://t.me/pietroabcd">Get Lifetime</a></td>
+      <td align="center"><a href="https://t.me/sipariopro_bot">Get Lifetime</a></td>
     </tr>
   </tbody>
 </table>
@@ -128,7 +128,7 @@
 <ol>
   <li><b>Download & Install:</b> Install Sipario Pro on your PC/Mac. Enjoy all Premium features unlocked for your <b>1-day free trial</b>.</li>
   <li><b>Copy Your Device Code:</b> Open Sipario Pro, navigate to <i>Upgrade to Premium</i>, and copy your unique Device Code (e.g., <code>ABCDE-12345-FGHIJ</code>).</li>
-  <li><b>Activate via Telegram:</b> Send your Device Code directly to <a href="https://t.me/pietroabcd"><b>@pietroabcd</b></a> on Telegram to receive your instant Annual or Lifetime license key!</li>
+  <li><b>Activate via Telegram:</b> Send your Device Code directly to <a href="https://t.me/sipariopro_bot"><b>@sipariopro_bot</b></a> on Telegram or through the official Web Portal to receive your instant Annual or Lifetime license key!</li>
 </ol>
 
 <hr />
@@ -137,8 +137,8 @@
   <h3>Ready to Upgrade Your Streaming Experience?</h3>
   <p>Get in touch on Telegram for instant activation and dedicated customer support.</p>
   <p>
-    <a href="https://t.me/pietroabcd">
-      <img src="https://img.shields.io/badge/Contact%20on%20Telegram-@pietroabcd-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Contact Telegram" />
+    <a href="https://t.me/sipariopro_bot">
+      <img src="https://img.shields.io/badge/Contact%20on%20Telegram-@sipariopro__bot-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Contact Telegram" />
     </a>
   </p>
 </div>
