@@ -14,48 +14,160 @@
         video { width: 100%; max-height: 450px; background: #000; border-radius: 8px; margin-top: 15px; }
         .hidden { display: none; }
         .error { color: #ef4444; font-size: 14px; }
+        .lang-select { margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Sipario Pro - Web Player</h2>
+        <h2 id="uiTitle">Sipario Pro - Web Player</h2>
 
         <div id="authView">
-            <p>Inserisci la tua chiave di licenza o il Machine ID per accedere al player:</p>
+            <!-- Selettore della Lingua -->
+            <select id="langSelect" class="lang-select" onchange="changeLanguage()">
+                <option value="it">Italiano</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="zh">中文</option>
+                <option value="ar">العربية</option>
+            </select>
+
+            <p id="uiPrompt">Inserisci la tua chiave di licenza o il Machine ID per accedere al player:</p>
             <input type="text" id="licenseKeyInput" placeholder="Inserisci chiave o Machine ID">
-            <button onclick="verifyAndEnter()">Accedi al Player</button>
+            <button id="uiBtnLogin" onclick="verifyAndEnter()">Accedi al Player</button>
             <p id="errorMsg" class="error"></p>
         </div>
 
         <div id="playerView" class="hidden">
-            <h3>Riproduzione in corso</h3>
+            <h3 id="uiPlayerTitle">Riproduzione in corso</h3>
             <input type="text" id="customStreamUrl" placeholder="Incolla URL flusso diretto (.m3u8)">
-            <button onclick="playCustomStream()">Riproduci URL</button>
+            <button id="uiBtnPlay" onclick="playCustomStream()">Riproduci URL</button>
 
             <video id="videoPlayer" controls playsinline></video>
             
-            <button onclick="logout()" style="background: #374151; margin-top: 20px;">Disconnetti</button>
+            <button id="uiBtnLogout" onclick="logout()" style="background: #374151; margin-top: 20px;">Disconnetti</button>
         </div>
     </div>
 
     <script>
-        // Punta al tuo Worker ufficiale corretto su Cloudflare
         const WORKER_URL = "https://sipario-license.sajapietro09.workers.dev";
 
+        // Dizionario delle traduzioni per l'interfaccia web
+        const i18n = {
+            it: {
+                prompt: "Inserisci la tua chiave di licenza o il Machine ID per accedere al player:",
+                placeholder: "Inserisci chiave o Machine ID",
+                btnLogin: "Accedi al Player",
+                playerTitle: "Riproduzione in corso",
+                placeholderStream: "Incolla URL flusso diretto (.m3u8)",
+                btnPlay: "Riproduci URL",
+                btnLogout: "Disconnetti",
+                errEmpty: "Inserisci un codice valido.",
+                errChecking: "Verifica licenza in corso...",
+                errInvalid: "Licenza non valida, scaduta o revocata.",
+                errConn: "Errore di connessione al server delle licenze."
+            },
+            en: {
+                prompt: "Enter your license key or Machine ID to access the player:",
+                placeholder: "Enter key or Machine ID",
+                btnLogin: "Access Player",
+                playerTitle: "Now Playing",
+                placeholderStream: "Paste direct stream URL (.m3u8)",
+                btnPlay: "Play URL",
+                btnLogout: "Disconnect",
+                errEmpty: "Please enter a valid code.",
+                errChecking: "Verifying license...",
+                errInvalid: "License invalid, expired or revoked.",
+                errConn: "Connection error to the license server."
+            },
+            es: {
+                prompt: "Introduce tu clave de licencia o Machine ID para acceder al reproductor:",
+                placeholder: "Introduce clave o Machine ID",
+                btnLogin: "Acceder al Reproductor",
+                playerTitle: "Reproduciendo",
+                placeholderStream: "Pega la URL de transmisión (.m3u8)",
+                btnPlay: "Reproducir URL",
+                btnLogout: "Desconectar",
+                errEmpty: "Introduce un código válido.",
+                errChecking: "Verificando licencia...",
+                errInvalid: "Licencia no válida, caducada o revocada.",
+                errConn: "Error de conexión con el servidor de licencias."
+            },
+            fr: {
+                prompt: "Entrez votre clé de licence ou Machine ID pour accéder au lecteur:",
+                placeholder: "Entrez la clé ou Machine ID",
+                btnLogin: "Accéder au Lecteur",
+                playerTitle: "Lecture en cours",
+                placeholderStream: "Collez l'URL du flux (.m3u8)",
+                btnPlay: "Lire l'URL",
+                btnLogout: "Déconnexion",
+                errEmpty: "Veuillez entrer un code valide.",
+                errChecking: "Vérification de la licence...",
+                errInvalid: "Licence invalide, expirée ou révoquée.",
+                errConn: "Erreur de connexion au serveur de licence."
+            },
+            zh: {
+                prompt: "输入你的许可证密钥或设备代码（Machine ID）以访问播放器：",
+                placeholder: "输入密钥或 Machine ID",
+                btnLogin: "进入播放器",
+                playerTitle: "正在播放",
+                placeholderStream: "粘贴直接流地址 (.m3u8)",
+                btnPlay: "播放网址",
+                btnLogout: "断开连接",
+                errEmpty: "请输入有效代码。",
+                errChecking: "正在验证许可证...",
+                errInvalid: "许可证无效、已过期或已被吊销。",
+                errConn: "连接许可证服务器时出错。"
+            },
+            ar: {
+                prompt: "أدخل مفتاح الترخيص أو معرف الجهاز للوصول إلى المشغل:",
+                placeholder: "أدخل المفتاح أو معرف الجهاز",
+                btnLogin: "الوصول إلى المشغل",
+                playerTitle: "جاري التشغيل",
+                placeholderStream: "ألصق رابط البث المباشر (.m3u8)",
+                btnPlay: "تشغيل الرابط",
+                btnLogout: "قطع الاتصال",
+                errEmpty: "الرجاء إدخال رمز صالح.",
+                errChecking: "جاري التحقق من الترخيص...",
+                errInvalid: "الترخيص غير صالح أو منتهي الصلاحية أو ملغي.",
+                errConn: "خطأ في الاتصال بخادم التراخيص."
+            }
+        };
+
+        function updateTexts() {
+            const lang = document.getElementById("langSelect").value;
+            const t = i18n[lang] || i18n.en;
+
+            document.getElementById("uiPrompt").innerText = t.prompt;
+            document.getElementById("licenseKeyInput").placeholder = t.placeholder;
+            document.getElementById("uiBtnLogin").innerText = t.btnLogin;
+            document.getElementById("uiPlayerTitle").innerText = t.playerTitle;
+            document.getElementById("customStreamUrl").placeholder = t.placeholderStream;
+            document.getElementById("uiBtnPlay").innerText = t.btnPlay;
+            document.getElementById("uiBtnLogout").innerText = t.btnLogout;
+        }
+
+        function changeLanguage() {
+            const lang = document.getElementById("langSelect").value;
+            localStorage.setItem("sipario_web_lang", lang);
+            updateTexts();
+        }
+
         async function verifyAndEnter() {
+            const lang = document.getElementById("langSelect").value;
+            const t = i18n[lang] || i18n.en;
             const key = document.getElementById("licenseKeyInput").value.trim();
             const errorMsg = document.getElementById("errorMsg");
 
             if (!key) {
-                errorMsg.innerText = "Inserisci un codice valido.";
+                errorMsg.innerText = t.errEmpty;
                 return;
             }
 
-            errorMsg.innerText = "Verifica licenza in corso...";
+            errorMsg.innerText = t.errChecking;
 
             try {
-                // Interroga l'endpoint /verify del Worker
                 const response = await fetch(`${WORKER_URL}/verify`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -69,10 +181,10 @@
                     document.getElementById("authView").classList.add("hidden");
                     document.getElementById("playerView").classList.remove("hidden");
                 } else {
-                    errorMsg.innerText = data.error || "Licenza non valida, scaduta o revocata.";
+                    errorMsg.innerText = t.errInvalid;
                 }
             } catch (e) {
-                errorMsg.innerText = "Errore di connessione al server delle licenze.";
+                errorMsg.innerText = t.errConn;
             }
         }
 
@@ -104,6 +216,14 @@
         }
 
         window.onload = () => {
+            // Recupera la lingua salvata in precedenza (se presente)
+            const savedLang = localStorage.getItem("sipario_web_lang");
+            if (savedLang && i18n[savedLang]) {
+                document.getElementById("langSelect").value = savedLang;
+            }
+            updateTexts();
+
+            // Controllo sessione esistente
             const savedKey = localStorage.getItem("sipario_web_session");
             if (savedKey) {
                 document.getElementById("licenseKeyInput").value = savedKey;
