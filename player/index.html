@@ -40,7 +40,8 @@
     </div>
 
     <script>
-        const WORKER_URL = "https://sipario-api.sajapietro09.workers.dev";
+        // Punta al tuo Worker ufficiale corretto su Cloudflare
+        const WORKER_URL = "https://sipario-license.sajapietro09.workers.dev";
 
         async function verifyAndEnter() {
             const key = document.getElementById("licenseKeyInput").value.trim();
@@ -54,20 +55,21 @@
             errorMsg.innerText = "Verifica licenza in corso...";
 
             try {
-                const response = await fetch(`${WORKER_URL}/validate`, {
+                // Interroga l'endpoint /verify del Worker
+                const response = await fetch(`${WORKER_URL}/verify`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ key: key, machineId: key })
+                    body: JSON.stringify({ key: key })
                 });
 
                 const data = await response.json();
 
-                if (data.valid) {
+                if (data.success) {
                     localStorage.setItem("sipario_web_session", key);
                     document.getElementById("authView").classList.add("hidden");
                     document.getElementById("playerView").classList.remove("hidden");
                 } else {
-                    errorMsg.innerText = "Licenza non valida, scaduta o revocata.";
+                    errorMsg.innerText = data.error || "Licenza non valida, scaduta o revocata.";
                 }
             } catch (e) {
                 errorMsg.innerText = "Errore di connessione al server delle licenze.";
