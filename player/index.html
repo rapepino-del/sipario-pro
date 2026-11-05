@@ -178,8 +178,8 @@
                     document.getElementById("authView").classList.add("hidden");
                     document.getElementById("playerView").classList.remove("hidden");
                 } else {
-                    errorMsg.innerText = t.errInvalid;
-                }
+    errorMsg.innerText = "❌ " + (data.error || t.errInvalid);
+            }
             } catch (e) {
                 errorMsg.innerText = t.errConn;
             }
