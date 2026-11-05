@@ -5,18 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <title>Sipario Web Premium</title>
-<!-- Assicurati che app.css e le librerie siano caricate sul server web -->
 <link rel="stylesheet" href="app.css">
 <style>
-  /* Stile integrativo per sovrapporre il Gatekeeper finché non è sbloccato */
+  /* Gatekeeper Style */
   #web-gatekeeper {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg, #0f1015);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg, #0f1015); z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
   }
 </style>
 </head>
@@ -24,7 +19,7 @@
 
 <div id="splash"><div class="curtain"></div><div class="splash-in"><div class="logo">Sipario</div><p>Il tuo cinema, a luci spente.</p></div></div>
 
-<!-- GATEKEEPER LICENZA WEB (Sostituisce il vecchio #fatal) -->
+<!-- GATEKEEPER LICENZA WEB -->
 <section id="web-gatekeeper">
   <div class="login-box">
     <div class="dlg-top"><div class="logo sm">Sipario</div></div>
@@ -33,7 +28,6 @@
     <form id="license-form" onsubmit="event.preventDefault(); verifyWebLicense();">
       <div id="fx">
         <label>Chiave di Licenza
-          <!-- Usa lo stile nativo degli input di Sipario -->
           <input id="f-license-key" type="text" placeholder="SIPA1.xxxx.yyyy" autocomplete="off" required>
         </label>
       </div>
@@ -44,7 +38,7 @@
   </div>
 </section>
 
-<!-- IL RESTO DELL'APP RIMANE IDENTICO AL DESKTOP -->
+<!-- SEZIONI ORIGINALI DI SIPARIO (Nascosste finché non si sblocca) -->
 <section id="login" hidden>
   <div class="login-box">
     <div class="dlg-top"><div class="logo sm">Sipario</div><select class="langsel" aria-label="Lingua"></select></div>
@@ -134,30 +128,45 @@
 
 <div id="toast" hidden></div>
 
-<!-- Script per l'autenticazione tramite Cloudflare Worker -->
+<!-- GESTIONE LICENZA WEB E MOCK DELLE API ELECTRON -->
 <script>
   const WORKER_URL = "https://sipario-license.sajapietro09.workers.dev";
   const gatekeeper = document.getElementById('web-gatekeeper');
   const errBox = document.getElementById('license-err');
 
-  // Controllo immediato della sessione
-  if (localStorage.getItem('sipario_web_session')) {
-      gatekeeper.style.display = 'none'; // Nasconde il blocco e lascia gestire l'UI ad app.js
+  // Variabili globali per l'app
+  let webLicenseData = null;
+
+  async function checkSession() {
+      const savedKey = localStorage.getItem('sipario_web_session');
+      if (savedKey) {
+          try {
+              const res = await fetch(`${WORKER_URL}/verify`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ key: savedKey })
+              });
+              const data = await res.json();
+              if (data.success) {
+                  webLicenseData = data.data;
+                  gatekeeper.style.display = 'none';
+                  initSiparioApp();
+              } else {
+                  localStorage.removeItem('sipario_web_session');
+              }
+          } catch(e) {}
+      }
   }
 
   async function verifyWebLicense() {
       const key = document.getElementById('f-license-key').value.trim();
       const btn = document.getElementById('btn-verify-license');
-      
       if (!key.startsWith('SIPA1.')) {
           errBox.textContent = "Formato chiave non valido. Inizia con SIPA1.";
           errBox.hidden = false;
           return;
       }
-      
-      btn.disabled = true;
-      btn.textContent = "Verifica in corso...";
-      errBox.hidden = true;
+      btn.disabled = true; btn.textContent = "Verifica in corso..."; errBox.hidden = true;
 
       try {
           const response = await fetch(`${WORKER_URL}/verify`, {
@@ -169,11 +178,9 @@
 
           if (data.success) {
               localStorage.setItem("sipario_web_session", key);
-              gatekeeper.style.display = 'none'; // Sblocca l'accesso
-              // Se app.js aveva bloccato l'inizializzazione, forziamo il reload per caricare l'app
-              if(document.getElementById('login').hidden && document.getElementById('app').hidden) {
-                  location.reload(); 
-              }
+              webLicenseData = data.data;
+              gatekeeper.style.display = 'none';
+              initSiparioApp();
           } else {
               errBox.textContent = "❌ " + (data.error || "Licenza non valida.");
               errBox.hidden = false;
@@ -182,15 +189,63 @@
           errBox.textContent = "❌ Errore di connessione al server delle licenze.";
           errBox.hidden = false;
       } finally {
-          btn.disabled = false;
-          btn.textContent = "Sblocca Player";
+          btn.disabled = false; btn.textContent = "Sblocca Player";
       }
   }
+
+  // Simula le API di Electron per app.js
+  function initSiparioApp() {
+      if (window.sipario) return; // Già inizializzato
+      
+      window.sipario = {
+          boot: async () => {
+              return {
+                  token: "web-session",
+                  status: {
+                      plan: "pro", // Se è entrato, è Premium
+                      licensee: webLicenseData ? webLicenseData.e : "Utente Web",
+                      machine: "WebBrowser",
+                      exp: webLicenseData ? webLicenseData.x : 0,
+                      limits: { accounts: 99, profiles: 6, favorites: 1e9, hidden: 1e9, history: 1e9, epg: true, parental: true, themes: true, autonext: true, sleep: true, backup: true, transcode: false }
+                  },
+                  ffmpeg: false, // FFmpeg non è disponibile sul browser
+                  version: "Web-1.0",
+                  cfg: {
+                      free: { accounts: 1, profiles: 1, favorites: 20, hidden: 5, history: 5 },
+                      pro: { accounts: 99, profiles: 6, favorites: 1e9, hidden: 1e9, history: 1e9 }
+                  },
+                  legal: { eula: "", privacy: "", third: "" }
+              };
+          },
+          vaultGet: async () => {
+              try { return JSON.parse(localStorage.getItem('sipario_vault')); } catch(e) { return null; }
+          },
+          vaultSet: async (v) => {
+              localStorage.setItem('sipario_vault', JSON.stringify(v));
+          },
+          onLicense: () => {},
+          onUpdate: () => {},
+          open: (url) => { window.open(url, '_blank'); },
+          quit: () => { window.location.reload(); },
+          removeLicense: async () => {
+              localStorage.removeItem('sipario_web_session');
+              window.location.reload();
+          }
+      };
+
+      // Carica dinamicamente app.js solo dopo aver preparato il mock
+      const script = document.createElement('script');
+      script.src = "app.js";
+      document.body.appendChild(script);
+  }
+
+  // Esegui controllo al caricamento
+  checkSession();
 </script>
 
 <script src="vendor/hls.min.js"></script>
 <script src="vendor/mpegts.js"></script>
 <script src="i18n.js"></script>
-<script src="app.js"></script>
+<!-- Nota: Abbiamo rimosso <script src="app.js"></script> da qui. Verrà caricato da initSiparioApp() -->
 </body>
 </html>
