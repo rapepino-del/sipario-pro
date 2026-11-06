@@ -7,11 +7,15 @@
 <title>Sipario Web Premium</title>
 <link rel="stylesheet" href="app.css">
 <style>
-  /* Gatekeeper Style */
+  /* Stile integrativo per sovrapporre il Gatekeeper finché non è sbloccato */
   #web-gatekeeper {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg, #0f1015); z-index: 9999;
-    display: flex; align-items: center; justify-content: center;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg, #0f1015);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
 </head>
@@ -38,7 +42,7 @@
   </div>
 </section>
 
-<!-- SEZIONI ORIGINALI DI SIPARIO (Nascosste finché non si sblocca) -->
+<!-- SEZIONI ORIGINALI DI SIPARIO -->
 <section id="login" hidden>
   <div class="login-box">
     <div class="dlg-top"><div class="logo sm">Sipario</div><select class="langsel" aria-label="Lingua"></select></div>
@@ -128,13 +132,12 @@
 
 <div id="toast" hidden></div>
 
-<!-- GESTIONE LICENZA WEB E MOCK DELLE API ELECTRON -->
+<!-- GESTIONE LICENZA WEB, TOKEN E MOCK DELLE API ELECTRON -->
 <script>
   const WORKER_URL = "https://sipario-license.sajapietro09.workers.dev";
   const gatekeeper = document.getElementById('web-gatekeeper');
   const errBox = document.getElementById('license-err');
 
-  // Variabili globali per l'app
   let webLicenseData = null;
 
   async function checkSession() {
@@ -149,10 +152,12 @@
               const data = await res.json();
               if (data.success) {
                   webLicenseData = data.data;
+                  localStorage.setItem("sipario_web_session_token", data.session_token); 
                   gatekeeper.style.display = 'none';
                   initSiparioApp();
               } else {
                   localStorage.removeItem('sipario_web_session');
+                  localStorage.removeItem('sipario_web_session_token');
               }
           } catch(e) {}
       }
@@ -161,12 +166,16 @@
   async function verifyWebLicense() {
       const key = document.getElementById('f-license-key').value.trim();
       const btn = document.getElementById('btn-verify-license');
+      
       if (!key.startsWith('SIPA1.')) {
           errBox.textContent = "Formato chiave non valido. Inizia con SIPA1.";
           errBox.hidden = false;
           return;
       }
-      btn.disabled = true; btn.textContent = "Verifica in corso..."; errBox.hidden = true;
+      
+      btn.disabled = true; 
+      btn.textContent = "Verifica in corso..."; 
+      errBox.hidden = true;
 
       try {
           const response = await fetch(`${WORKER_URL}/verify`, {
@@ -178,6 +187,7 @@
 
           if (data.success) {
               localStorage.setItem("sipario_web_session", key);
+              localStorage.setItem("sipario_web_session_token", data.session_token);
               webLicenseData = data.data;
               gatekeeper.style.display = 'none';
               initSiparioApp();
@@ -189,26 +199,28 @@
           errBox.textContent = "❌ Errore di connessione al server delle licenze.";
           errBox.hidden = false;
       } finally {
-          btn.disabled = false; btn.textContent = "Sblocca Player";
+          btn.disabled = false; 
+          btn.textContent = "Sblocca Player";
       }
   }
 
-  // Simula le API di Electron per app.js
   function initSiparioApp() {
-      if (window.sipario) return; // Già inizializzato
+      if (window.sipario) return; 
       
+      const jwtSessionToken = localStorage.getItem('sipario_web_session_token');
+
       window.sipario = {
           boot: async () => {
               return {
-                  token: "web-session",
+                  token: jwtSessionToken, 
                   status: {
-                      plan: "pro", // Se è entrato, è Premium
+                      plan: "pro", 
                       licensee: webLicenseData ? webLicenseData.e : "Utente Web",
                       machine: "WebBrowser",
                       exp: webLicenseData ? webLicenseData.x : 0,
                       limits: { accounts: 99, profiles: 6, favorites: 1e9, hidden: 1e9, history: 1e9, epg: true, parental: true, themes: true, autonext: true, sleep: true, backup: true, transcode: false }
                   },
-                  ffmpeg: false, // FFmpeg non è disponibile sul browser
+                  ffmpeg: false, 
                   version: "Web-1.0",
                   cfg: {
                       free: { accounts: 1, profiles: 1, favorites: 20, hidden: 5, history: 5 },
@@ -229,23 +241,21 @@
           quit: () => { window.location.reload(); },
           removeLicense: async () => {
               localStorage.removeItem('sipario_web_session');
+              localStorage.removeItem('sipario_web_session_token');
               window.location.reload();
           }
       };
 
-      // Carica dinamicamente app.js solo dopo aver preparato il mock
       const script = document.createElement('script');
       script.src = "app.js";
       document.body.appendChild(script);
   }
 
-  // Esegui controllo al caricamento
   checkSession();
 </script>
 
 <script src="vendor/hls.min.js"></script>
 <script src="vendor/mpegts.js"></script>
 <script src="i18n.js"></script>
-<!-- Nota: Abbiamo rimosso <script src="app.js"></script> da qui. Verrà caricato da initSiparioApp() -->
 </body>
 </html>
